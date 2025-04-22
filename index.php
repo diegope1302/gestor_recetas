@@ -22,49 +22,42 @@ $recetas = $stmt->fetchAll(PDO::FETCH_ASSOC);
 </head>
 
 <body>
-    <h1>Gestor de Recetas</h1>
+    <div class="container">
+    <h1>💯Gestor de Recetas💯</h1>
 
     <form method="GET" action="index.php">
         <input type="text" name="buscar" placeholder="Buscar receta por título" value="<?php echo htmlspecialchars($busqueda); ?>">
-        <button type="submit">Buscar</button>
+        <button type="submit">🔎</button>
     </form>
 
     <br>
-    <a href="agregar_receta.php">Agregar nueva receta</a>
+    <a href="agregar_receta.php">✔️Agregar nueva receta</a>
     <br><br>
 
     <table border="1" cellpadding="10">
-        <tr>
-            <th>Título</th>
-            <th>Descripción</th>
-            <th>Ingredientes</th>
-            <th>Pasos</th>
-            <th>Tiempo (min)</th>
-            <th>Imagen</th>
-            <th>Acciones</th>
-        </tr>
+    <div class="grid">
+    <?php foreach ($recetas as $receta): ?>
+        <div class="card">
+            <?php if ($receta['imagen']): ?>
+                <img src="imagenes/<?php echo htmlspecialchars($receta['imagen']); ?>" alt="Imagen de receta">
+            <?php else: ?>
+                <div class="no-image">Sin imagen</div>
+            <?php endif; ?>
+            <h2><?php echo htmlspecialchars($receta['titulo']); ?></h2>
+            <p><strong>Descripción:</strong> <?php echo htmlspecialchars($receta['descripcion']); ?></p>
+            <p><strong>Ingredientes:</strong> <?php echo htmlspecialchars($receta['ingredientes']); ?></p>
+            <p><strong>Pasos:</strong> <?php echo htmlspecialchars($receta['pasos']); ?></p>
+            <p><strong>Tiempo:</strong> <?php echo $receta['tiempo_preparacion']; ?> min</p>
+            <div class="acciones">
+                <a href="editar_receta.php?id=<?php echo $receta['id']; ?>" class="boton">✏️ Editar</a>
+                <a href="eliminar.php?id=<?php echo $receta['id']; ?>" class="boton eliminar" onclick="return confirm('¿Eliminar esta receta?');">🗑️ Eliminar</a>
+            </div>
+        </div>
+    <?php endforeach; ?>
+</div>
 
-        <?php foreach ($recetas as $receta): ?>
-            <tr>
-                <td><?php echo htmlspecialchars($receta['titulo']); ?></td>
-                <td><?php echo htmlspecialchars($receta['descripcion']); ?></td>
-                <td><?php echo htmlspecialchars($receta['ingredientes']); ?></td>
-                <td><?php echo htmlspecialchars($receta['pasos']); ?></td>
-                <td><?php echo $receta['tiempo_preparacion']; ?></td>
-                <td>
-                    <?php if ($receta['imagen']): ?>
-                        <img src="imagenes/<?php echo $receta['imagen']; ?>" width="100">
-                    <?php else: ?>
-                        Sin imagen
-                    <?php endif; ?>
-                </td>
-                <td>
-                    <a href="editar_receta.php?id=<?php echo $receta['id']; ?>">Editar</a> |
-                    <a href="eliminar.php?id=<?php echo $receta['id']; ?>" onclick="return confirm('�Eliminar esta receta?');">Eliminar</a>
-                </td>
-            </tr>
-        <?php endforeach; ?>
     </table>
+    </div>
 </body>
 </html>
 

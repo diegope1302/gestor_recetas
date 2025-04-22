@@ -57,25 +57,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 
 <body>
-    <h1>Editar Receta</h1>
+    <div class="container">
+    <h1>✏️Editar Receta✏️</h1>
 
     <form method="POST" enctype="multipart/form-data">
-        <label>Título:</label><br>
+        <label>1️⃣Título:</label><br>
         <input type="text" name="titulo" value="<?php echo htmlspecialchars($receta['titulo']); ?>" required><br>
 
-        <label>Descripción:</label><br>
+        <label>2️⃣Descripción:</label><br>
         <textarea name="descripcion" required><?php echo htmlspecialchars($receta['descripcion']); ?></textarea><br>
 
-        <label>Ingredientes:</label><br>
+        <label>3️⃣Ingredientes:</label><br>
         <textarea name="ingredientes" required><?php echo htmlspecialchars($receta['ingredientes']); ?></textarea><br>
 
-        <label>Pasos:</label><br>
+        <label>4️⃣Pasos:</label><br>
         <textarea name="pasos" required><?php echo htmlspecialchars($receta['pasos']); ?></textarea><br>
 
-        <label>Tiempo de preparación (minutos):</label><br>
+        <label>5️⃣Tiempo de preparación (minutos):</label><br>
         <input type="number" name="tiempo_preparacion" value="<?php echo $receta['tiempo_preparacion']; ?>" required><br>
 
-        <label>Imagen actual:</label><br>
+        <label>6️⃣Imagen actual:</label><br>
         <?php if ($receta['imagen']): ?>
             <img src="imagenes/<?php echo $receta['imagen']; ?>" width="100"><br>
         <?php else: ?>
@@ -90,5 +91,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <br>
     <a href="index.php">Volver al listado</a>
+    </div>
 </body>
 </html>
